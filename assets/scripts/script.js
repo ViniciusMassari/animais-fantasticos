@@ -6,9 +6,9 @@ import Modal from "./modules/modal.js";
 import ToolTip from "./modules/tooltip.js";
 import initDropDownMenu from "./modules/dropdown-menu.js";
 import initMenuMobile from "./modules/menu-mobile.js";
-import initFetchBitcoin from "./modules/fetch-bitcoin.js";
+import fetchBitcoin from "./modules/fetch-bitcoin.js";
 import initOperating from "./modules/operating.js";
-import initFetchAnimais from "./modules/fetch-animais.js";
+import fetchAnimais from "./modules/fetch-animais.js";
 
 const smoothScroll = new SmoothScroll("[data-menu='suave'] a[href^='#']");
 smoothScroll.init();
@@ -38,8 +38,8 @@ initDropDownMenu();
 
 initMenuMobile();
 
-initFetchBitcoin();
 
 initOperating();
 
-initFetchAnimais();
+fetchAnimais("../../animais-api.json", ".numeros-grid");
+fetchBitcoin("https://blockchain.info/ticker", ".btc-preco");
