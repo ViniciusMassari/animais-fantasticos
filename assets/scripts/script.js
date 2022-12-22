@@ -1,4 +1,4 @@
-import initScrollAnimation from "./modules/scroll-animation.js";
+import ScrollAnima from "./modules/scroll-anima.js";
 import SmoothScroll from "./modules/smooth-scroll.js";
 import TabNav from "./modules/tab-nav.js";
 import Accordion from "./modules/faq-accordion.js";
@@ -29,7 +29,8 @@ const modal = new Modal(
 );
 modal.init();
 
-initScrollAnimation();
+const scrollAnima = new ScrollAnima("[data-anime='scroll']");
+scrollAnima.init()
 
 const toolTip = new ToolTip("[data-tooltip]");
 toolTip.init();
