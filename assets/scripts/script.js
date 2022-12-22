@@ -5,7 +5,7 @@ import Accordion from "./modules/faq-accordion.js";
 import Modal from "./modules/modal.js";
 import ToolTip from "./modules/tooltip.js";
 import DropDownMenu from "./modules/dropdown-menu.js";
-import initMenuMobile from "./modules/menu-mobile.js";
+import MenuMobile from "./modules/menu-mobile.js";
 import fetchBitcoin from "./modules/fetch-bitcoin.js";
 import initOperating from "./modules/operating.js";
 import fetchAnimais from "./modules/fetch-animais.js";
@@ -30,17 +30,16 @@ const modal = new Modal(
 modal.init();
 
 const scrollAnima = new ScrollAnima("[data-anime='scroll']");
-scrollAnima.init()
+scrollAnima.init();
 
 const toolTip = new ToolTip("[data-tooltip]");
 toolTip.init();
 
 const dropDownMenu = new DropDownMenu("[data-dropdown]");
-dropDownMenu.init()
+dropDownMenu.init();
 
-initMenuMobile();
-
-
+const menuMobile = new MenuMobile("[data-menu='button']", "[data-menu='list']");
+menuMobile.init();
 initOperating();
 
 fetchAnimais("../../animais-api.json", ".numeros-grid");
