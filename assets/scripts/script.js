@@ -4,7 +4,7 @@ import TabNav from "./modules/tab-nav.js";
 import Accordion from "./modules/faq-accordion.js";
 import Modal from "./modules/modal.js";
 import ToolTip from "./modules/tooltip.js";
-import initDropDownMenu from "./modules/dropdown-menu.js";
+import DropDownMenu from "./modules/dropdown-menu.js";
 import initMenuMobile from "./modules/menu-mobile.js";
 import fetchBitcoin from "./modules/fetch-bitcoin.js";
 import initOperating from "./modules/operating.js";
@@ -35,7 +35,8 @@ scrollAnima.init()
 const toolTip = new ToolTip("[data-tooltip]");
 toolTip.init();
 
-initDropDownMenu();
+const dropDownMenu = new DropDownMenu("[data-dropdown]");
+dropDownMenu.init()
 
 initMenuMobile();
 
