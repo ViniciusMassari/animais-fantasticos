@@ -1,11 +1,12 @@
+import debounce from "./debounce.js";
+
 export default class ScrollAnima {
   constructor(sections) {
     this.sections = document.querySelectorAll(sections);
     this.halfWindow = window.innerHeight * 0.6;
 
-    this.checkDistance = this.checkDistance.bind(this);
+    this.checkDistance = debounce(this.checkDistance.bind(this), 50);
   }
-
 
   // pega a distância de cada item em relação
   // ao topo do site
@@ -33,14 +34,14 @@ export default class ScrollAnima {
 
   init() {
     if (this.sections.length) {
-      this.getDistance()
+      this.getDistance();
       this.checkDistance();
       window.addEventListener("scroll", this.checkDistance);
     }
     return this;
   }
 
-  stop(){
+  stop() {
     window.removeEventListener("scroll", this.checkDistance);
   }
 }
