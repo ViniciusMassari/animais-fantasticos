@@ -1,38 +1,51 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-param-reassign */
-export default function initAnimaNumeros() {
-  const numeros = document.querySelectorAll("[data-numero]");
+export default class AnimaNumeros {
+  constructor(numeros, observerTarget, observerClass) {
+    this.numeros = document.querySelectorAll(numeros);
+    this.observerTarget = document.querySelector(observerTarget);
+    this.observerClass = observerClass;
 
-  function animaNumeros() {
-    numeros.forEach((numero) => {
-      const total = +numero.innerText;
-      const incremento = Math.floor(total / 100);
-      let start = 0;
+    this.handleMutation = this.handleMutation.bind(this);
+  }
 
-      const timer = setInterval(() => {
-        start += incremento;
-        numero.innerText = start;
+  static incrementNumber(number) {
+    const total = +number.innerText;
+    const incremento = Math.floor(total / 100);
+    let start = 0;
 
-        if (start > total) {
-          numero.innerText = total;
-          clearInterval(timer);
-        }
-      }, 1000 * Math.random());
+    const timer = setInterval(() => {
+      start += incremento;
+      number.innerText = start;
+
+      if (start > total) {
+        number.innerText = total;
+        clearInterval(timer);
+      }
+    }, 1000 * Math.random());
+  }
+
+  animaNumeros() {
+    this.numeros.forEach((number) => {
+      this.constructor.incrementNumber(number);
     });
   }
 
-  let observer;
-
-  function handleMutation(mutation) {
-    if (mutation[0].target.classList.contains("ativo")) {
-      observer.disconnect();
-      animaNumeros();
+  handleMutation(mutation) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
+      this.observer.disconnect();
+      this.animaNumeros();
     }
   }
 
-  observer = new MutationObserver(handleMutation);
+  addMutationObserver() {
+    this.observer = new MutationObserver(this.handleMutation);
+    this.observer.observe(this.observerTarget, { attributes: true });
+  }
 
-  const observeTarget = document.querySelector(".numeros");
+  init() {
+    if (this.observerTarget && this.numeros.length) {
+      this.addMutationObserver();
+    }
 
-  observer.observe(observeTarget, { attributes: true });
+    return this;
+  }
 }
